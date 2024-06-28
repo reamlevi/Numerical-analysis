@@ -1,8 +1,11 @@
 """
 Authors : ream levi - 205866692 , yarden shaked - 206789885.
-GitHub : 
+GitHub : https://github.com/reamlevi/Numerical-analysis.git
 Assignment 2 - Numeric Analytics
 """
+
+from copy import deepcopy
+
 
 def square_matrix(matrix)->bool:
     """
@@ -17,7 +20,6 @@ def square_matrix(matrix)->bool:
     num_rows = len(matrix)
     for row in matrix:
         if len(row)!= num_rows:
-            print("Matrix must be square")
             return False
     return True        
 
@@ -91,7 +93,7 @@ def inverse(matrix)-> list[list[float]]:
 
     return identity_matrix
 
-def identity_calc(num_rows_and_cols):
+def identity_calc(num_rows_and_cols)-> list[list[float]]:
     """
     This function generates an identity matrix of size num_rows_and_cols x num_rows_and_cols.
 
@@ -103,17 +105,73 @@ def identity_calc(num_rows_and_cols):
     """
     return [[float(i == j) for j in range(num_rows_and_cols)] for i in range(num_rows_and_cols)]
  
+def max_norm(matrix)-> float:
+    """
+    Calculate the maximum norm of a matrix.
+    
+    Parameters:
+    matrix (list of lists): The matrix.
+
+    Returns:
+    float: The maximum norm of the matrix.
+    """
+    num_rows = len(matrix)
+    max_norm = 0
+    for i in range(num_rows):
+        norm = 0
+        for j in range(num_rows):
+            norm += abs(matrix[i][j])
+        if norm > max_norm:
+            max_norm = norm
+    return max_norm*1.0
+
+def print_matrix(matrix)-> None:
+    """
+    This function prints the given matrix.
+    
+    Parameters:
+    matrix (list of lists): The matrix to be printed.
+    """
+    for row in matrix:
+        print('  '.join(map(str, row)))
+    
+    print()
+
+def main()-> None:
+    """
+    * Initializes a matrix (A) and prints it.
+    * Checks if it's a square matrix.
+    * Calculates its determinant and checks if it's singular.
+    * Calculates its inverse (B) and prints it.
+    * Calculates the maximum norms of A and its inverse B.
+    * Finally, calculates the COND of A.
+    """
+
+    A = [[1,-1,-2],[2,-3,-5],[-1,3,5]]
+
+    print("A:")
+    print_matrix(A)
+
+    if not square_matrix(A):
+        print("Matrix must be square")
+        return
+    
+    if determinant(A) == 0:
+        print("Matrix is singular")
+        return
+    
+    B =  inverse(deepcopy(A))
+    print("A^-1:")
+    print_matrix(B)
+    
+    print("||A|| max:", max_norm(A))
+    print("||A^-1|| max:", max_norm(B))
+    print("COND = ", max_norm(A)*max_norm(B))
+   
+main()
 
 
 
 
-        
-
-A = [[1,-1,-2],[2,-3,-5],[-1,3,5]]
-
-print(square_matrix(A))
-print(determinant(A))
-
-print(inverse(A))
 
 
