@@ -137,6 +137,38 @@ def print_matrix(matrix)-> None:
     
     print()
 
+def initialize_matrix():
+    """
+    Initializes a matrix based on user input or a default matrix.
+
+    Returns:
+    list of lists: The initialized matrix.
+    
+    """
+    if input("Do you want to enter a matrix? (y/n): ") == "y":
+        A = user_input_matrix()
+    else:
+        A = [[1,-1,-2],[2,-3,-5],[-1,3,5]]
+    return A
+
+def user_input_matrix()-> list[list[int]]:
+    """
+    This function gets a matrix from the user.
+    
+    Returns:
+    list of lists: The matrix entered by the user.
+
+    """
+    num_rows = 3
+    num_cols = 3
+    matrix = []
+    for i in range(num_rows):
+        row = []
+        for j in range(num_cols):
+            row.append(int(input(f"Enter element [{i}][{j}]: ")))
+        matrix.append(row)
+    return matrix
+
 def main()-> None:
     """
     * Initializes a matrix (A) and prints it.
@@ -146,8 +178,7 @@ def main()-> None:
     * Calculates the maximum norms of A and its inverse B.
     * Finally, calculates the COND of A.
     """
-
-    A = [[1,-1,-2],[2,-3,-5],[-1,3,5]]
+    A = initialize_matrix()
 
     print("A:")
     print_matrix(A)
@@ -167,7 +198,7 @@ def main()-> None:
     print("||A|| max:", max_norm(A))
     print("||A^-1|| max:", max_norm(B))
     print("COND = ", max_norm(A)*max_norm(B))
-   
+  
 main()
 
 
