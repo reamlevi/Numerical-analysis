@@ -137,13 +137,13 @@ def print_matrix(matrix)-> None:
     
     print()
 
-def initialize_matrix():
+def initialize_matrix() -> list[list[int]]:
     """
     Initializes a matrix based on user input or a default matrix.
 
     Returns:
     list of lists: The initialized matrix.
-    
+
     """
     if input("Do you want to enter a matrix? (y/n): ") == "y":
         A = user_input_matrix()
@@ -173,13 +173,12 @@ def main()-> None:
     """
     * Initializes a matrix (A) and prints it.
     * Checks if it's a square matrix.
-    * Calculates its determinant and checks if it's singular.
+    * Calculates its determinant and checks if it's singular - Det(A) = 0.
     * Calculates its inverse (B) and prints it.
     * Calculates the maximum norms of A and its inverse B.
     * Finally, calculates the COND of A.
     """
     A = initialize_matrix()
-
     print("A:")
     print_matrix(A)
 
